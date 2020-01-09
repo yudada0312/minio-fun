@@ -1,28 +1,16 @@
-// var http = require("http");
 
-// http.createServer(function(request, response) {
-//   response.writeHead(200, {"Content-Type": "text/plain"});
-//   response.write("Hello World");
-//   response.end();
-// }).listen(8888);
+const dotenv = require('dotenv');
+dotenv.config();
 
 const MinIO = require('minio');
 
 var client = new MinIO.Client({
-    endPoint: 'minio.ha7777.net',
-    port: 443,
-    useSSL: true,
-    accessKey: 'minioRD9M56rEYAtZ',
-    secretKey: '07pl27pDzeBtxSD1'
+    endPoint: process.env.END_POINT,
+    port: Number(process.env.PORT),
+    useSSL: (process.env.PORT==443) ? true : false,
+    accessKey: process.env.ACCESS_KEY,
+    secretKey: process.env.SECRET_Key
 });
-
-// var client = new MinIO.Client({
-//   endPoint: '18.162.142.154',
-//   port: 9000,
-//   useSSL: false,
-//   accessKey: 'minioRD9M56rEYAtZ',
-//   secretKey: '07pl27pDzeBtxSD1'
-// });
 
 // express是一个小巧的Http server封装，不过这对任何HTTP server都管用。
 const server = require('express')()
