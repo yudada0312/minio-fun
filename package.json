@@ -1,15 +1,19 @@
 {
   "name": "test",
   "version": "1.0.0",
-  "description": "test minio",
-  "main": "hello.js",
+  "description": "test minio fun",
+  "main": "main.js",
   "scripts": {
+    "start":"forever start -w main.js",
+    "list":"forever list",
+    "stop":"forever stop main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "yudada",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
+    "forever": "^2.0.0",
     "minio": "^7.0.12"
   }
 }

@@ -1,19 +1,59 @@
-<div style="border:1px rgb(163, 162, 160) solid; margin-bottom: 5px;">
+<style>
+    .section{
+        border:1px rgb(163, 162, 160) solid; margin-bottom: 5px;
+    }
+</style>
+<div class="section">
     <p>上傳圖片</p>
     <input type="file" id="selector" multiple>
     <button onclick="upload()">Upload</button>
     <div id="status">No uploads</div>
 </div>
-<div style="border:1px rgb(163, 162, 160) solid;">
+<div class="section">
     <p>檢查 bucket name</p>
     bucket name:
     <input type="text" id="bucket_name"></input>
     <button onclick="check_bucket()">check bucket</button>
     <div id="check_bucket_status">
-        
     </div>
 </div>
+</div>
+<div class="section">
+    <p>產生 bucket</p>
+    bucket name:
+    <input type="text" id="make_bucket_name"></input>
+    <button onclick="make_bucket()">make bucket</button>
+    <div id="make_bucket_status">
+    </div>
+</div>
+<div class="section">
+    <p>查看所有 bucket</p>
+    <button onclick="list_bucket()">list bucket</button>
+    <pre id="list_bucket">
+    </pre>
+</div>
 <script type="text/javascript">
+    function list_bucket(){
+        fetch('/listBuckets').then((res) => {
+            return res.json();
+        }).then(data=>{
+            console.log(data);
+            document.querySelector('#list_bucket').innerHTML = JSON.stringify(data, undefined, 2);
+        }).catch((e) => {
+            console.err
+        });
+    }
+    function make_bucket(){
+        let bucket_name = document.querySelector("#make_bucket_name").value;
+        fetch('/makeBucket?bucket_name='+bucket_name).then((res) => {
+            return res.text();
+        }).then(data=>{
+            console.log(data);
+            document.querySelector('#make_bucket_status').innerHTML = data;
+        }).catch((e) => {
+            console.err
+        });
+    } 
     function check_bucket(){
         let bucket_name = document.querySelector("#bucket_name").value;
         console.log(bucket_name);
