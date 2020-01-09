@@ -4,9 +4,9 @@
   "description": "test minio fun",
   "main": "main.js",
   "scripts": {
-    "start":"forever start -w main.js",
-    "list":"forever list",
-    "stop":"forever stop main.js",
+    "start": "forever start -w main.js",
+    "list": "forever list",
+    "stop": "forever stop main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "yudada",

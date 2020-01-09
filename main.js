@@ -28,11 +28,10 @@ var client = new MinIO.Client({
 const server = require('express')()
 
 server.get('/presignedUrl', (req, res) => {
-    client.presignedPutObject('number-taker2', req.query.name, (err, url) => {
+    client.presignedPutObject(req.query.bucket_name, req.query.name, (err, url) => {
         if (err) throw err
         res.end(url)
     })
-    res.send('OK');
 })
 
 server.get('/checkBucketExists', (req, res) => {

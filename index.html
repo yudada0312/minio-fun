@@ -5,6 +5,8 @@
 </style>
 <div class="section">
     <p>上傳圖片</p>
+    bucket name:
+    <input type="text" id="upload_bucket_name"></input><br/>
     <input type="file" id="selector" multiple>
     <button onclick="upload()">Upload</button>
     <div id="status">No uploads</div>
@@ -85,7 +87,8 @@
     // `retrieveNewURL` accepts the name of the current file and invokes the `/presignedUrl` endpoint to
     // generate a pre-signed URL for use in uploading that file: 
     function retrieveNewURL(file, cb) {
-        fetch(`/presignedUrl?name=${file.name}`).then((response) => {
+        let bucket_name = document.querySelector("#upload_bucket_name").value;
+        fetch(`/presignedUrl?name=${file.name}&bucket_name=${bucket_name}`).then((response) => {
             response.text().then((url) => {
                 cb(file, url);
             });
